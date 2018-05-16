@@ -1,0 +1,44 @@
+.todoWrapper {
+    border-bottom: 1px solid #efefef;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .DeleteTodo {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    outline: none;
+    box-shadow: none;
+    border-width: 2px;
+    border-radius: 3px;
+    border-style: solid;
+    padding: 8px;
+    color: rgba(187, 45, 55, 0.76);
+    border-color: rgba(187, 45, 55, 0.76);
+    background-color: transparent;
+  }
+  .DeleteTodo:hover {
+    background-color: transparent;
+    border: 2px solid rgba(245, 0, 16, 0.76);
+    color: rgba(245, 0, 16, 0.76);
+    cursor: pointer;
+    }
+
+  .EditTodo {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    outline: none;
+    box-shadow: none;
+    border-width: 2px;
+    border-radius: 3px;
+    border-style: solid;
+    padding: 8px;
+    color: rgba(128, 57, 0, 0.877);
+    border-color: rgba(70, 35, 7, 0.877);
+    background-color: transparent;
+  }
+  .EditTodo:hover {
+    background-color: transparent;
+    border: 2px solid #047204;
+    color: #047204;
+    cursor: pointer;
+    }
