@@ -8,7 +8,7 @@ import * as apiCalls from './api';
 /**
  * TodoList component performing crud operation
  * Async await ES7 is used for api calls from backend
- */ 
+ */
 
 class TodoList extends Component {
   constructor(props) {
@@ -18,7 +18,12 @@ class TodoList extends Component {
       isEdit: false,
       todo: {}
     }
+
     this.addTodo = this.addTodo.bind(this);
+    this.editTodo = this.editTodo.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this)
+    this.updateTodoAPI = this.updateTodoAPI.bind(this);
+    this.toggleCompleted = this.toggleCompleted.bind(this)
   }
 
   componentDidMount() {
@@ -35,25 +40,47 @@ class TodoList extends Component {
     let newTodo = await apiCalls.createTodo(val);
     this.setState({todos: [...this.state.todos, newTodo]})
    }
-  
-   async deleteTodo(id){
-    await apiCalls.removeTodo(id);
-    const todos = this.state.todos.filter(todo => todo._id !== id);
+
+   async deleteTodo({ _id }){
+     debugger
+    await apiCalls.removeTodo(_id);
+    const todos = this.state.todos.filter(todo => todo._id !== _id);
     this.setState({todos: todos});
   }
-  
+
   async editTodo(todo) {
     this.setState({isEdit: true, todo});
-    let updatedTodo = await apiCalls.updateTodo(todo);
-    const todos = this.state.todos.map(t =>
-      (t._id === updatedTodo._id)
-      ? {...t, name: t.name, completed: !t.completed}
-      : t
-      )
-    console.log("in edit todo", todo);
-    this.setState({todos: todos});
   }
- 
+
+   async updateTodoAPI(newName) {
+     let updateTodo = {
+       ...this.state.todo,
+       name: newName
+     };
+
+    let updatedTodo = await apiCalls.updateTodo(updateTodo);
+
+    const todos = this.state.todos.map(t =>
+      (t._id === updateTodo._id)
+      ? updateTodo
+      : t
+    );
+
+    this.setState({ todos: todos, isEdit: false, todo: {} });
+  }
+
+  async toggleCompleted(todo){
+   await apiCalls.updateTodo(todo);
+
+   const todos = this.state.todos.map(t =>
+     (t._id === todo._id)
+     ? {...t, completed: !t.completed }
+     : t
+   );
+
+   this.setState({ todos: todos });
+  }
+
 
   render() {
     console.log(this.state.todos)
@@ -61,9 +88,10 @@ class TodoList extends Component {
     const todos = this.state.todos.map((t) => (
       <TodoItem
         key={t._id}
-        {...t}
-        onDelete={this.deleteTodo.bind(this,t._id)}
-        onEdit={this.editTodo.bind(this,t)}
+        todo={t}
+        onDelete={this.deleteTodo}
+        toggleCompleted={this.toggleCompleted}
+        onEdit={this.editTodo}
       />
     ));
 
@@ -71,15 +99,15 @@ class TodoList extends Component {
           <div className="todolist-app">
           <div className="todo-wrapper">
           <Header />
-          <TodoForm  addTodo={this.addTodo} isEdit={this.state.isEdit} todo={this.state.todo}/>
+          <TodoForm  updateTodoAPI={this.updateTodoAPI} addTodo={this.addTodo} isEdit={this.state.isEdit} todo={this.state.todo}/>
               <ul>
               {todos}
               </ul>
           </div>
           </div>
-         
-          
-          
+
+
+
     );
   }
 }

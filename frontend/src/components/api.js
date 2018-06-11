@@ -15,7 +15,7 @@ export async function getTodos() {
         }
       }
       return resp.json();
-   }) 
+   })
 }
 
 export async function createTodo(val){
@@ -72,7 +72,7 @@ export async function updateTodo(todo) {
      headers: new Headers({
        'Content-Type': 'application/json',
      }),
-     body: JSON.stringify({name: todo.name, completed: !todo.completed})
+     body: JSON.stringify({ name: todo.name, completed: !todo.completed })
    })
     .then(resp => {
       if(!resp.ok) {

@@ -1,35 +1,50 @@
 import React from 'react'
+
 import './todoitems.css';
 
- const TodoItems = ({name, completed, onDelete, onEdit}) => {
-  
-    return (
-      <div class="todoWrapper">
-       <span>  
+class TodoItem extends React.Component {
+  onDelete = () => {
+      this.props.onDelete(this.props.todo)
+  }
+
+  onEdit = () => {
+      this.props.onEdit(this.props.todo)
+  }
+
+  toggleCompleted = () => {
+      this.props.toggleCompleted(this.props.todo)
+  }
+
+  render(){
+    const { todo } = this.props;
+     return (
+      <div className="todoWrapper">
+       <span>
      <button className="DeleteTodo"
-          onClick={onDelete}
+          onClick={this.onDelete}
         >
          Delete
         </button>
     </span>
-    <span>  
+    <span>
      <button className="EditTodo"
-          onClick={onEdit}
+          onClick={this.onEdit}
         >
          Edit
         </button>
     </span>
       <span
+      onClick={this.toggleCompleted}
       style={{
-          textDecoration: completed? 'line-through': 'none'
+          textDecoration: todo.completed ? 'line-through': 'none'
       }}
        >
-      {name}
+      {todo.name}
      </span>
-    
+
   </div>
     );
   }
+}
 
-
-export default TodoItems;
+export default TodoItem;
