@@ -4,19 +4,23 @@ This App is Built with the frontend with React and Bootstap 4 & Backend with the
 Client => holds the frontend 
 Server => holds the backend
 
-## 2 Start work
+### Screenshot for this todolist app
+![todolist](https://user-images.githubusercontent.com/21228768/50609487-0b795c00-0ed0-11e9-9b4a-5e5d2ad2c51e.png)
+
+
+###  Start work
 
     cd client && cd server
    
-## 3 Install dependencies
+### Install dependencies
 
     npm install for both client and server side dependencies
 
-## 4. Run Both client and server
+###  Run Both client and server
 
    client => npm start
    server => node index.js
 
-## 5. visit browser
+###  visit browser
      
    https://localhost:3000
